@@ -1,0 +1,32 @@
+name: Static Site CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  #validation and testing
+  validate:
+    name: HTML validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: validate HTML
+        uses: cyb3r-jak3/html5validator-action@v7.2.0
+        with: 
+            root: .
+            blacklist: .git
