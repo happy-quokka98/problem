@@ -38,3 +38,21 @@ jobs:
 
             - name: Typescript Typecheck
               run: npx tsc --noEmit
+
+    test:
+        name: Unit and Integration test
+        needs: code-quality
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v7
+            - name: Setup Node.js
+              uses: actions/setup-node@v7
+              with: 
+                node-version: 25
+                cache: 'npm'
+            - name: Install dependecies
+              run: npm ci
+
+            - name: Run Vitest
+              run: npm test -- --run --coverage
