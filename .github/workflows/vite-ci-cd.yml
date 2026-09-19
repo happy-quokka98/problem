@@ -1,57 +1,84 @@
 name: Production Vite CI/CD Pipeline
 
 on:
-    push:
-        branches: [ "main" ]
-    pull_request: 
-        branches: [ "main" ]
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 concurrency:
-    group: ${{ github.workflow }} - ${{ github.ref }}
-    cancel-in-progress: true
+  group: ${{ github.workflow }} - ${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
-    contents: read
-    pages: write
-    id-token: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-    code-quality:
-        name: Lint, Format and Typecheck
-        runs-on: ubuntu-latest
-        steps: 
-            - name: Checkout repository
-              uses: actions/checkout@v7
-            - name: Setup Node.js
-              uses: actions/setup-node@v7
-              with: 
-                node-version: 25
-                cache: 'npm'
-            - name: Install dependecies
-              run: npm ci
+  code-quality:
+    name: Lint, Format and Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 25
+          cache: "npm"
+      - name: Install dependecies
+        run: npm ci
 
-            - name: Check formatting
-              run: npx prettier --check . || echo "Formatting check skipped"
-            
-            - name: Run ESLint
-              run: npm run lint
+      - name: Check formatting
+        run: npx prettier --check . || echo "Formatting check skipped"
 
-            - name: Typescript Typecheck
-              run: npx tsc --noEmit
+      - name: Run ESLint
+        run: npm run lint
 
-    test:
-        name: Unit and Integration test
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v7
-            - name: Setup Node.js
-              uses: actions/setup-node@v7
-              with: 
-                node-version: 25
-                cache: 'npm'
-            - name: Install dependecies
-              run: npm ci
+      - name: Typescript Typecheck
+        run: npx tsc --noEmit
 
-            - name: Run Vitest
-              run: npm test -- --run --coverage
+  test:
+    name: Unit and Integration test
+    needs: code-quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 25
+          cache: "npm"
+      - name: Install dependecies
+        run: npm ci
+
+      - name: Run Vitest
+        run: npm test -- --run --coverage
+
+  build:
+    name: Building Vite App
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 25
+          cache: "npm"
+      - name: Install dependecies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with: 
+            name: vite-product-dist
+            path: dist/
+            retention-days: 7
+
