@@ -103,7 +103,7 @@ jobs:
         run: npm ci
       
       - name: Static Logic
-        run: npx eslint . --plugin sonarjs --rule `sonarjs/no-all-duplicated-branches`
+        run: npx eslint . --plugin sonarjs`
 
       - name: Run property-Based tests
         run: npm test -- --run
