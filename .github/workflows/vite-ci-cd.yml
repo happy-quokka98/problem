@@ -41,7 +41,6 @@ jobs:
 
     test:
         name: Unit and Integration test
-        needs: code-quality
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
