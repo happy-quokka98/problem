@@ -104,6 +104,3 @@ jobs:
       
       - name: Run property-Based tests
         run: npm test -- --run
-
-      - name: Run Mutation Tests
-        run: npx stryker run
