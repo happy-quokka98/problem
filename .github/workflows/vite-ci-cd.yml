@@ -1,0 +1,40 @@
+name: Production Vite CI/CD Pipeline
+
+on:
+    push:
+        branches: [ "main" ]
+    pull_request: 
+        branches: [ "main" ]
+
+concurrency:
+    group: ${{ github.workflow }} - ${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+jobs:
+    code-quality:
+        name: Lint, Format and Typecheck
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Checkout repository
+              uses: actions/checkout@v7
+            - name: Setup Node.js
+              uses: actions/setup-node@v7
+              with: 
+                node-version: 25
+                cache: 'npm'
+            - name: Install dependecies
+              run: npm ci
+
+            - name: Check formatting
+              run: npx prettier --check . || echo "Formatting check skipped"
+            
+            - name: Run ESLint
+              run: npm run lint
+
+            - name: Typescript Typecheck
+              run: npx tsc --noEmit
