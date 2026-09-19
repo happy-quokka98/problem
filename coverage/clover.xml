@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1789832523805" clover="3.2.0">
+  <project timestamp="1789832523805" name="All files">
+    <metrics statements="28" coveredstatements="28" conditionals="24" coveredconditionals="24" methods="16" coveredmethods="16" elements="68" coveredelements="68" complexity="0" loc="28" ncloc="28" packages="2" files="3" classes="3"/>
+    <package name="src">
+      <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="12" coveredmethods="12"/>
+      <file name="App.css" path="C:\Users\kakhi\OneDrive\Documents\projects\problem\src\App.css">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="App.tsx" path="C:\Users\kakhi\OneDrive\Documents\projects\problem\src\App.tsx">
+        <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="12" coveredmethods="12"/>
+        <line num="21" count="19" type="stmt"/>
+        <line num="22" count="19" type="stmt"/>
+        <line num="23" count="19" type="stmt"/>
+        <line num="25" count="19" type="stmt"/>
+        <line num="26" count="6" type="stmt"/>
+        <line num="27" count="10" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="32" count="19" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="19" type="stmt"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="123" count="4" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="13" coveredstatements="13" conditionals="20" coveredconditionals="20" methods="4" coveredmethods="4"/>
+      <file name="helpers.ts" path="C:\Users\kakhi\OneDrive\Documents\projects\problem\src\utils\helpers.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="20" coveredconditionals="20" methods="4" coveredmethods="4"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="10" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="20" count="6" type="cond" truecount="4" falsecount="0"/>
+        <line num="21" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="28" count="2" type="cond" truecount="2" falsecount="0"/>
+      </file>
+    </package>
+  </project>
+</coverage>
